@@ -7,14 +7,15 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
-class CategoryTableViewController: UITableViewController {
-    var category = [Category]()
-    let context = CoreDataMananger.shared.persistentContainer.viewContext
+class CategoryTableViewController: BaseUITableViewController {
+    var category: Results<Category>?
+    let realmManager = RealmMananger.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addActivityIndicatorToTable(#selector(refreshCategories))
 
     }
     
@@ -46,35 +47,39 @@ class CategoryTableViewController: UITableViewController {
     }
     
     func addToCategory(categoryName: String) {
-        let newCategory = Category(context: context)
+        let newCategory = Category()
         newCategory.name = categoryName
-        category.append(newCategory)
-        persistCategory()
+        persistCategory(newCategory)
     }
     
-    func persistCategory() {
-        CoreDataMananger.shared.saveContext()
-        loadCategory()
+    func persistCategory(_ newCategory: Category) {
+       realmManager.save(object: newCategory)
+       loadCategory()
     }
     
-    func loadCategory(request: NSFetchRequest<Category> = Category.fetchRequest()) {
-        do {
-            category = try context.fetch(request)
-            tableView.reloadData()
-        } catch {
-            print("\(error)")
+    func loadCategory() {
+        category = realmManager.get(objectsType: Category.self)
+        tableView.reloadData()
+    }
+    
+    @objc func refreshCategories() {
+        //Simulation of a query that takes 1 second
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.loadCategory()
+            self.tableView.refreshControl?.endRefreshing()
         }
+        
     }
     
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return category.count
+         return category?.count ?? 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        cell.textLabel?.text = category[indexPath.row].name
+        cell.textLabel?.text = category?[indexPath.row].name ?? "No Categories added yet"
         return cell
     }
     
@@ -88,7 +93,7 @@ class CategoryTableViewController: UITableViewController {
         }
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = category[indexPath.row]
+            destinationVC.selectedCategory = category?[indexPath.row]
         }
         
         
