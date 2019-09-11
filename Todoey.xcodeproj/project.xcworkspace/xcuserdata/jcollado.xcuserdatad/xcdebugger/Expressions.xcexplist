@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "CategoryTableViewController.numberOfSections(in:):CategoryTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "category.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TodoListViewController.loadItems(fetchRequestItem:):TodoListViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "itemArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CategoryTableViewController.loadCategory(request:):CategoryTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "category">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
