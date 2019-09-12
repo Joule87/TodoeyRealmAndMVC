@@ -33,10 +33,20 @@ class RealmMananger {
         }
     }
     
-    func remove(object: Object) {
+    func remove(_ object: Object, cascading: Bool) {
         do {
             try realm.write {
-                realm.delete(object)
+                realm.delete(object, cascading: cascading)
+            }
+        } catch {
+            print("Error trying to delete Object: \(error)")
+        }
+    }
+    
+    func removeList<T:Object>(_ objects: List<T>) {
+        do {
+            try realm.write {
+                realm.delete(objects)
             }
         } catch {
             print("Error trying to delete Object: \(error)")

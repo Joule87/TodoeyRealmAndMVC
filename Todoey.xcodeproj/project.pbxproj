@@ -18,6 +18,7 @@
 		F4AB93D723269B0100E52EF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4AB93D523269B0100E52EF6 /* Main.storyboard */; };
 		F4AB93D923269B0200E52EF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4AB93D823269B0200E52EF6 /* Assets.xcassets */; };
 		F4AB93DC23269B0200E52EF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4AB93DA23269B0200E52EF6 /* LaunchScreen.storyboard */; };
+		F4E884B5232A8CB300600737 /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E884B4232A8CB300600737 /* RealmExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		F4AB93D823269B0200E52EF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4AB93DB23269B0200E52EF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4AB93DD23269B0200E52EF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4E884B4232A8CB300600737 /* RealmExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		F4AB93D023269B0100E52EF6 /* Todoey */ = {
 			isa = PBXGroup;
 			children = (
+				F4E884B1232A8C5700600737 /* Common */,
 				F41FD742232822D800A43F11 /* Service */,
 				F45332022326EC1D00643BD7 /* Controller */,
 				F4AB93E32326E6F100E52EF6 /* Data Model */,
@@ -141,6 +144,30 @@
 				F46DA109232930150018CDAE /* Category.swift */,
 			);
 			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		F4E884B1232A8C5700600737 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F4E884B3232A8C6B00600737 /* Extensions */,
+				F4E884B2232A8C6000600737 /* Utils */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F4E884B2232A8C6000600737 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F4E884B3232A8C6B00600737 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F4E884B4232A8CB300600737 /* RealmExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +272,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -252,6 +280,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -270,6 +299,7 @@
 				F4AB93D223269B0100E52EF6 /* AppDelegate.swift in Sources */,
 				F41FD7452328235900A43F11 /* RealmMananger.swift in Sources */,
 				F46DA108232930090018CDAE /* Item.swift in Sources */,
+				F4E884B5232A8CB300600737 /* RealmExtension.swift in Sources */,
 				F41FD7412328196E00A43F11 /* CategoryTableViewController.swift in Sources */,
 				F46DA10A232930150018CDAE /* Category.swift in Sources */,
 			);

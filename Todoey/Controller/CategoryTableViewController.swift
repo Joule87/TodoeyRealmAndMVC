@@ -13,10 +13,12 @@ class CategoryTableViewController: BaseUITableViewController {
     var category: Results<Category>?
     let realmManager = RealmMananger.shared
     
+    //MARK:- Override View Controller Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addActivityIndicatorToTable(#selector(refreshCategories))
-
+        tableView.rowHeight = 70
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +48,8 @@ class CategoryTableViewController: BaseUITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    //MARK:- View Controller Methods
+    
     func addToCategory(categoryName: String) {
         let newCategory = Category()
         newCategory.name = categoryName
@@ -71,6 +75,17 @@ class CategoryTableViewController: BaseUITableViewController {
         
     }
     
+    //MARK:- Optional but mandatory methods to implement
+    override func getCellIdentifier() -> String {
+        return "CategoryCell"
+    }
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let category = self.category?[indexPath.row] {
+            self.realmManager.remove(category, cascading: true)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,7 +93,7 @@ class CategoryTableViewController: BaseUITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         cell.textLabel?.text = category?[indexPath.row].name ?? "No Categories added yet"
         return cell
     }

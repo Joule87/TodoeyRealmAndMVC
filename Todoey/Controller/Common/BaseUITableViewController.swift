@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 class BaseUITableViewController: UITableViewController {
    
@@ -17,4 +18,43 @@ class BaseUITableViewController: UITableViewController {
         refreshControl.addTarget(self, action: selectorAction, for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = getCellIdentifier()
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SwipeTableViewCell
+        cell.delegate = self
+        return cell
+    }
+    
+    //MARK:- Manfatory Methods to implement
+    
+    //Override this method to set the Cell identifier of your UITableViewCell here
+    func getCellIdentifier() -> String {
+        return "UNKNOWN CELL IDENTIFIER"
+    }
+    //Override this method to remove the swiped cell for given indexPath
+    func updateModel(at indexPath: IndexPath) {
+        
+    }
+    
+}
+
+extension BaseUITableViewController: SwipeTableViewCellDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let removeAction = SwipeAction(style: .destructive, title: "Delete") { (swipeAction, intdexPath) in
+            self.updateModel(at: indexPath)
+        }
+        removeAction.image = UIImage(named: "delete-icon")
+        return [removeAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive
+        return options
+    }
+    
 }
