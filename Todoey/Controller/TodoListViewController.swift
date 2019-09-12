@@ -26,6 +26,7 @@ class TodoListViewController: BaseUITableViewController {
         super.viewDidLoad()
         addActivityIndicatorToTable(#selector(refreshLoadItems))
         tableView.rowHeight = 70
+        //navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     

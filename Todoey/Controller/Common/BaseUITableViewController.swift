@@ -11,6 +11,10 @@ import SwipeCellKit
 
 class BaseUITableViewController: UITableViewController {
    
+    override func viewDidLoad() {
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+    }
     //Adding an activity indicator to local tableView
     func addActivityIndicatorToTable(_ selectorAction: Selector) {
         let refreshControl = UIRefreshControl()
