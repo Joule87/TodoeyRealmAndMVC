@@ -14,7 +14,9 @@ class RealmMananger {
     static let shared = RealmMananger()
     private var realm = try! Realm()
     
-    private init() {}
+    private init() {
+        print("Realm file path: \(String(describing: Realm.Configuration.defaultConfiguration.fileURL?.absoluteString))")
+    }
     
     // MARK: - Realm Methods
     
@@ -30,6 +32,7 @@ class RealmMananger {
             }
         } catch {
             print("Error trying to save Object: \(error)")
+           // Optional -> throw RealmError.notSaved(error: error)
         }
     }
     
